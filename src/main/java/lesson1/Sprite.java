@@ -11,7 +11,8 @@ public class Sprite {
     protected float getLeft() {
         return x - halfWidth;
     }
-    protected void setLeft(float left) {
+    protected void setLeft(float left)
+    {
         x = left + halfWidth;
     }
     protected float getRight() {
