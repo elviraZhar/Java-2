@@ -37,8 +37,7 @@ public class Sprite {
     protected float getWidth() {
         return 2f * halfWidth;
     }
-    protected float getHeight() {
-        return 2f * halfHeight;
+    protected float getHeight() {        return 2f * halfHeight;
     }
 
     void update(GameCanvas canvas, float deltaTime) {}
