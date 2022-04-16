@@ -20,7 +20,9 @@ public class PhoneBook {
         phoneBook.put("Petrov", (List<String>) petrov);
         phoneBook.put("Glebova", (List<String>) glebova);
 
-        System.out.println(phoneBook);
+        phoneBook.get("Ivanov");
+
+        System.out.println(phoneBook.get("Ivanov"));
     }
 
 }
