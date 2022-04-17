@@ -45,12 +45,12 @@ public class MainApp3 {
         HashSet<Metal> setMetal = new HashSet<>(Arrays.asList(metals));
         System.out.println(setMetal);
 
-        Map resultMap = new HashMap<>();
-        for (int i = 0; i < arrMetal.size(); i++) {
-            if (resultMap.containsKey(arrMetal.get(i))) {
-                resultMap.put(arrMetal.get(i), resultMap.get(arrMetal.get(i)) + 1);
+        HashMap<String, Integer> resultMap = new HashMap<>();
+        for (int i = 0; i < metals.length; i++) {
+            if (resultMap.containsKey(metals[i])) {
+                resultMap.put(String.valueOf(metals[i]), resultMap.get(metals[i]) + 1);
             } else {
-                resultMap.put(arrMetal.get(i), 1);
+                resultMap.put(String.valueOf(metals[i]), 1);
             }
         }
         System.out.println(resultMap);
