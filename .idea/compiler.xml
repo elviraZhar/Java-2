@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Java-2" />
+        <module name="Chat-Common" />
+        <module name="Chat-Server" />
+        <module name="Chat-Client" />
+        <module name="Network" />
       </profile>
     </annotationProcessing>
   </component>
