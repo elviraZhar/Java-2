@@ -17,7 +17,7 @@ public class ServerGUI extends JFrame implements ActionListener, Thread.Uncaught
     private final ChatServer server = new ChatServer(this);
     private final JButton btnStart = new JButton("Start");
     private final JButton btnStop = new JButton("Stop");
-    private final JPanel panelTop = new JPanel(new GridLayout(1,2));
+    private final JPanel panelTop = new JPanel(new GridLayout(1, 2));
     private final JTextArea log = new JTextArea();
 
     private ServerGUI() {
@@ -63,12 +63,12 @@ public class ServerGUI extends JFrame implements ActionListener, Thread.Uncaught
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         e.printStackTrace();
-        String msg = "Exception in thread " + t.getName() +
-                " " + e.getClass().getCanonicalName() +
-                ": " + e.getMessage() +
-                "\n\t" + e.getStackTrace()[0];
-        JOptionPane.showMessageDialog(null, msg,
-                "Exception", JOptionPane.ERROR_MESSAGE);
+//        String msg = "Exception in thread " + t.getName() +
+//                " " + e.getClass().getCanonicalName() +
+//                ": " + e.getMessage() +
+//                "\n\t" + e.getStackTrace()[0];
+//        JOptionPane.showMessageDialog(null, msg,
+//                "Exception", JOptionPane.ERROR_MESSAGE);
     }
 
     @Override

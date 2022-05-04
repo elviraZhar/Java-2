@@ -9,6 +9,20 @@ public class Messages {
     public static final String MSG_FORMAT_ERROR = "/msg_error";
     public static final String USER_LIST = "/user_list";
     public static final String USER_BROADCAST = "/user_bcast";
+    public static final String USER_PRIVATE = "/user_priv_user";//для приватных сообщений
+
+    public static String getUserPrivate(String nickname, String msg) {//для приватных сообщений
+        return USER_PRIVATE + DELIMITER + msg;
+    }
+
+    public static String getTypeBcastFromClient(String msg) {
+        return USER_BROADCAST + DELIMITER + msg;
+    }
+
+    // /userlist±user1±user2±.....
+    public static String getUserList(String users) {
+        return USER_LIST + DELIMITER + users;
+    }
 
     public static String getAuthRequest(String login, String password) {
         return AUTH_REQUEST + DELIMITER + login + DELIMITER + password;
