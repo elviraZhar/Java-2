@@ -1,8 +1,8 @@
 package Client;
 
+import Common.Messages;
 import Network.SocketThread;
 import Network.SocketThreadListener;
-import Common.Messages;
 
 import javax.swing.*;
 import java.awt.*;
