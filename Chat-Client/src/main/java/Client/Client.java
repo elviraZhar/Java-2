@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
@@ -15,7 +16,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
-public class Client extends JFrame implements ActionListener, Thread.UncaughtExceptionHandler, SocketThreadListener {
+public class Client extends JFrame implements ActionListener, Thread.UncaughtExceptionHandler,
+        SocketThreadListener {
     private static final int WIDTH = 600;
     private static final int HEIGHT = 300;
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss: ");
@@ -26,7 +28,7 @@ public class Client extends JFrame implements ActionListener, Thread.UncaughtExc
     private final JTextField tfIPAddress = new JTextField("127.0.0.1");
     private final JTextField tfPort = new JTextField("8189");
     private final JCheckBox cbAlwaysOnTop = new JCheckBox("Always on top");
-    private final JTextField tfLogin = new JTextField("ivan-igorevich");
+    private final JTextField tfLogin = new JTextField("lala");
     private final JPasswordField tfPassword = new JPasswordField("123");
     private final JButton btnLogin = new JButton("Login");
 
@@ -74,9 +76,21 @@ public class Client extends JFrame implements ActionListener, Thread.UncaughtExc
         add(spUsers, BorderLayout.EAST);
 
         setVisible(true);
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
+        File dir = new File("history");
+        File file = new File("history/lala.txt");
+
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+        if (!file.exists()) {
+            file.createNewFile();
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -127,7 +141,7 @@ public class Client extends JFrame implements ActionListener, Thread.UncaughtExc
 //codewars, hackerrank, leetcode, codegame
 
     private void wrtMsgToLogFile(String msg, String username) {
-        try (FileWriter out = new FileWriter("log.txt", true)) {
+        try (FileWriter out = new FileWriter("history/lala.txt", true)) {
             out.write(username + ": " + msg + "\n");
             out.flush();
         } catch (IOException e) {
