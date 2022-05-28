@@ -1,21 +1,23 @@
 package ChatServer.Core;
 
+import Common.Messages;
 import Network.ServerSocketThread;
 import Network.ServerSocketThreadListener;
 import Network.SocketThread;
 import Network.SocketThreadListener;
-import Common.Messages;
-
 
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ChatServer implements ServerSocketThreadListener, SocketThreadListener {
     private final int SERVER_SOCKET_TIMEOUT = 2000;
     private final DateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss: ");
+    private  final ExecutorService executorService;
     private Vector<SocketThread> clients = new Vector<>();
 
     int counter = 0;
@@ -23,7 +25,9 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     ChatServerListener listener;
 
     public ChatServer(ChatServerListener listener) {
+
         this.listener = listener;
+        this.executorService = Executors.newCachedThreadPool();
     }
 
     public void start(int port) {
@@ -70,6 +74,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
 
     @Override
     public void onServerSocketCreated(ServerSocketThread t, ServerSocket s) {
+
         putLog("Server socket created");
     }
 
@@ -82,7 +87,9 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     public void onSocketAccepted(ServerSocketThread t, ServerSocket s, Socket client) {
         putLog("client connected");
         String name = "SocketThread" + client.getInetAddress() + ": " + client.getPort();
-        new ClientThread(this, name, client);
+        executorService.execute(() -> {
+            new ClientThread(this, name, client);//Не уверенна что потоки заздаются сдесь, подскажите где если не верно
+        });
     }
 
     @Override
@@ -132,15 +139,16 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
             case Messages.USER_BROADCAST:
                 sendToAllAuthorized(Messages.getTypeBroadcast(client.getNickname(), arr[1]));
                 break;
-            case Messages.USER_PRIVATE:
-                sendUserAuthorized(Messages.getUserPrivate(nickname, msg));//nickname выделяет красным в чем ошибка?
-                break;
+           // case Messages.USER_PRIVATE:
+             //   sendUserAuthorized(Messages.getUserPrivate(nickname, msg));//nickname выделяет красным в чем ошибка?
+               // break;
                 default:
                 client.msgFormatError(msg);
         }
     }
 
     private void sendUserAuthorized(String nickname, String msg) {
+
         findClientByNickname(nickname).sendMessage(msg);
     }
 
@@ -179,8 +187,8 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
     }
 
     @Override
-    public synchronized void onSocketException(SocketThread t, Throwable e) {
-        e.printStackTrace();
+    public synchronized void onSocketException(SocketThread t, Throwable e){
+    e.printStackTrace();
     }
 
     private String getUsers() {
