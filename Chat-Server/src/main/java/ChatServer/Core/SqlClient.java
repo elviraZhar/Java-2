@@ -32,7 +32,7 @@ public class SqlClient {
         }
         return null;
     }
-    synchronized static void registration (String login, String password, String nikname) {
+    synchronized static void registration (String login, String password, String nikname) {//регистрация в базе данных
         String query = String.format("inset into users (login, password, nikname) values (%s, %s, %s)", login, password, nikname);
     }
 }
