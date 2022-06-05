@@ -9,7 +9,12 @@ public class Messages {
     public static final String MSG_FORMAT_ERROR = "/msg_error";
     public static final String USER_LIST = "/user_list";
     public static final String USER_BROADCAST = "/user_bcast";
+    public static final String USER_REGISTRATION = "/user_registration";
     public static final String USER_PRIVATE = "/user_priv_user";//для приватных сообщений
+
+    public static String getUserRegistration(String login, String password, String nickname) {
+        return USER_REGISTRATION + DELIMITER + login + DELIMITER + password + DELIMITER + nickname;
+    }
 
     public static String getUserPrivate(String nickname, String msg) {//для приватных сообщений
         return USER_PRIVATE + DELIMITER + msg;

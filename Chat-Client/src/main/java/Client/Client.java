@@ -213,6 +213,9 @@ public class Client extends JFrame implements ActionListener, Thread.UncaughtExc
         String[] arr = value.split(Messages.DELIMITER);
         String msgType = arr[0];
         switch (msgType) {
+            case Messages.USER_REGISTRATION:
+                setTitle(TITLE + " registered as: " + arr[1]);
+                break;
             case Messages.AUTH_ACCEPT:
                 setTitle(TITLE + " logged in as: " + arr[1]);
                 break;

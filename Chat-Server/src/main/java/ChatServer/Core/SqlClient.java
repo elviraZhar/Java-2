@@ -22,7 +22,7 @@ public class SqlClient {
             throw new RuntimeException(throwables);
         }
     }
-    synchronized static String getNick(String login, String password) {//для авторизации
+    synchronized static String getNick(String login, String password) {
         String query = String.format("select nikname from users where login='%s' and password='%s'", login, password);
         try (ResultSet set = statement.executeQuery(query)) {
             if (set.next())
@@ -31,5 +31,8 @@ public class SqlClient {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    synchronized static void registration (String login, String password, String nikname) {//регистрация в базе данных
+        String query = String.format("inset into users (login, password, nikname) values (%s, %s, %s)", login, password, nikname);
     }
 }

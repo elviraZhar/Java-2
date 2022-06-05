@@ -149,7 +149,20 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         }
     }
 
-    private void handleNonAuthMsg(ClientThread client, String msg) {//авторизация
+    private void registrationMsg (ClientThread client, String msg) {
+        String[] arrReg = msg.split(Messages.DELIMITER);
+        if (arrReg.length != 4 || !arrReg[0].equals(Messages.USER_REGISTRATION)) {
+            client.msgFormatError(msg);
+            return;
+        }
+        String login = arrReg[1];
+        String password = arrReg[2];
+        String nickname = arrReg[3];
+        SqlClient.registration(arrReg[1], arrReg[2], arrReg[3]);
+        putLog("Registered as " + login);
+    }
+
+    private void handleNonAuthMsg(ClientThread client, String msg) {
         String[] arr = msg.split(Messages.DELIMITER);
         if (arr.length != 3 || !arr[0].equals(Messages.AUTH_REQUEST)) {
             client.msgFormatError(msg);
