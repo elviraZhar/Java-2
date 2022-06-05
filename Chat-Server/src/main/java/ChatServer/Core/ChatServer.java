@@ -149,7 +149,7 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
         }
     }
 
-    private void handleNonAuthMsg(ClientThread client, String msg) {
+    private void handleNonAuthMsg(ClientThread client, String msg) {//авторизация
         String[] arr = msg.split(Messages.DELIMITER);
         if (arr.length != 3 || !arr[0].equals(Messages.AUTH_REQUEST)) {
             client.msgFormatError(msg);
