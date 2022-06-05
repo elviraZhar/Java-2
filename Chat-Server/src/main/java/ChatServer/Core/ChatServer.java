@@ -132,9 +132,6 @@ public class ChatServer implements ServerSocketThreadListener, SocketThreadListe
             case Messages.USER_BROADCAST:
                 sendToAllAuthorized(Messages.getTypeBroadcast(client.getNickname(), arr[1]));
                 break;
-            case Messages.USER_PRIVATE:
-                sendUserAuthorized(Messages.getUserPrivate(nickname, msg));//nickname выделяет красным в чем ошибка?
-                break;
                 default:
                 client.msgFormatError(msg);
         }
